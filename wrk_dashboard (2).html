@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WRK Marketing — Portfolio Check-in · Week 21 (18–24 May 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-page: #F7F5F0;
+    --bg-surface: #FFFFFF;
+    --bg-muted: #F1EFE8;
+    --bg-subtle: #FBFAF6;
+    --text-primary: #1A1814;
+    --text-secondary: #56544E;
+    --text-tertiary: #8A877E;
+    --text-quiet: #B8B5AA;
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-medium: rgba(0, 0, 0, 0.1);
+    --border-strong: rgba(0, 0, 0, 0.16);
+    --accent: #1A1814;
+
+    --teal-50: #E8F4EE; --teal-100: #C9E4D4; --teal-500: #2B9968; --teal-700: #105C3D; --teal-900: #08382A;
+    --blue-50: #EAF1F9; --blue-100: #CADBF0; --blue-500: #3B7AB8; --blue-700: #1F4F86; --blue-900: #102E51;
+    --amber-50: #F8EFDC; --amber-100: #EFD8A8; --amber-500: #B57F1F; --amber-700: #7A5410; --amber-900: #4A3208;
+    --red-50: #F8E8E5; --red-100: #EFC8C0; --red-500: #C4502F; --red-700: #863319; --red-900: #4F1D0C;
+    --purple-50: #EFEDF8; --purple-100: #D4CFEC; --purple-700: #3F3585;
+
+    --radius-sm: 4px; --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-serif: 'Fraunces', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg-page); }
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'ss01', 'cv11';
+    letter-spacing: -0.005em;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 3.5rem 3rem 4rem; }
+
+  /* HEADER */
+  .header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-strong);
+    margin-bottom: 2.5rem;
+  }
+  .header-left { max-width: 720px; }
+  .eyebrow {
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-tertiary); font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ''; width: 24px; height: 1px; background: var(--text-tertiary);
+  }
+  .title {
+    font-family: var(--font-serif);
+    font-size: 44px; font-weight: 400;
+    letter-spacing: -0.02em; line-height: 1.05;
+    margin-top: 14px; color: var(--text-primary);
+  }
+  .title em { font-style: italic; font-weight: 300; color: var(--text-secondary); }
+  .subtitle {
+    font-size: 14px; color: var(--text-secondary);
+    margin-top: 14px; max-width: 560px; line-height: 1.55;
+  }
+  .header-right { text-align: right; padding-top: 4px; }
+  .export-btn {
+    background: var(--text-primary); color: var(--bg-surface); border: none;
+    padding: 11px 18px; border-radius: var(--radius-md);
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans); letter-spacing: 0.02em;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+  }
+  .export-btn:hover { opacity: 0.82; }
+  .export-btn:active { transform: scale(0.98); }
+  .meta-block { margin-top: 16px; font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.06em; }
+  .meta-block strong { color: var(--text-secondary); font-weight: 500; letter-spacing: 0.02em; }
+
+  /* EXECUTIVE NARRATIVE */
+  .narrative {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .narrative::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--teal-500);
+  }
+  .narrative-label {
+    font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--teal-700); font-weight: 500; margin-bottom: 10px;
+  }
+  .narrative-text {
+    font-family: var(--font-serif); font-size: 19px; font-weight: 300;
+    line-height: 1.5; color: var(--text-primary); letter-spacing: -0.01em;
+  }
+  .narrative-text strong {
+    font-weight: 500; font-style: normal; color: var(--text-primary);
+  }
+
+  /* KPI STRIP */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-bottom: 3rem; background: var(--border-medium); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); overflow: hidden; }
+  .kpi-card { background: var(--bg-surface); padding: 1.4rem 1.5rem; }
+  .kpi-label { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px; font-weight: 500; }
+  .kpi-value {
+    font-family: var(--font-serif);
+    font-size: 36px; font-weight: 400; letter-spacing: -0.025em;
+    line-height: 1; color: var(--text-primary);
+  }
+  .kpi-meta {
+    font-size: 12px; color: var(--text-secondary);
+    margin-top: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .kpi-value .small { font-size: 22px; color: var(--text-quiet); font-weight: 300; }
+  .kpi-trend {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 11px; padding: 2px 7px; border-radius: 4px;
+    font-variant-numeric: tabular-nums; font-weight: 500;
+  }
+  .trend-up { background: var(--teal-50); color: var(--teal-700); }
+  .trend-flat { background: var(--bg-muted); color: var(--text-secondary); }
+
+  /* SECTION HEADERS */
+  .section { margin-bottom: 3rem; }
+  .section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle); }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 22px; font-weight: 400; letter-spacing: -0.015em;
+    color: var(--text-primary);
+  }
+  .section-meta { font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+
+  /* COMMENTARY */
+  .commentary-list { display: flex; flex-direction: column; gap: 12px; }
+  .commentary-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    transition: border-color 0.15s ease;
+    position: relative;
+  }
+  .commentary-card:hover { border-color: var(--border-medium); }
+  .commentary-card::before {
+    content: ''; position: absolute; left: 0; top: 18px; bottom: 18px;
+    width: 2px; border-radius: 0 2px 2px 0;
+  }
+  .commentary-card.tone-top::before { background: var(--teal-500); }
+  .commentary-card.tone-on::before { background: var(--blue-500); }
+  .commentary-card.tone-monitor::before { background: var(--amber-500); }
+  .commentary-card.tone-attention::before { background: var(--red-500); }
+
+  .commentary-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; gap: 14px; flex-wrap: wrap; }
+  .commentary-id { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .commentary-name {
+    font-size: 15px; font-weight: 500; letter-spacing: -0.005em;
+    color: var(--text-primary);
+  }
+  .commentary-stats {
+    font-size: 11.5px; color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+    display: flex; gap: 14px; align-items: center;
+  }
+  .commentary-stats .stat-divider { color: var(--text-quiet); }
+  .commentary-stats strong { color: var(--text-secondary); font-weight: 500; }
+  .commentary-body {
+    font-size: 13.5px; color: var(--text-secondary);
+    line-height: 1.7; letter-spacing: -0.003em;
+  }
+
+  /* STATUS PILLS */
+  .pill {
+    font-size: 10.5px; padding: 3px 9px; border-radius: 100px;
+    font-weight: 500; letter-spacing: 0.03em; white-space: nowrap;
+    text-transform: uppercase; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .pill::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+  }
+  .pill-top { background: var(--teal-50); color: var(--teal-700); }
+  .pill-top::before { background: var(--teal-500); }
+  .pill-on { background: var(--blue-50); color: var(--blue-700); }
+  .pill-on::before { background: var(--blue-500); }
+  .pill-monitor { background: var(--amber-50); color: var(--amber-700); }
+  .pill-monitor::before { background: var(--amber-500); }
+  .pill-attention { background: var(--red-50); color: var(--red-700); }
+  .pill-attention::before { background: var(--red-500); }
+
+  /* CHARTS */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .chart-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    position: relative;
+    height: 380px;
+  }
+  .chart-card canvas { max-height: 310px; }
+  .chart-legend {
+    display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px;
+    font-size: 11px; color: var(--text-secondary);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  /* SCOREBOARD */
+  .scoreboard {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .scoreboard-head {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr 1.4fr 0.9fr;
+    gap: 16px;
+    padding: 14px 24px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 10.5px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--text-tertiary); font-weight: 500;
+  }
+  .scoreboard-row {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr 1.4fr 0.9fr;
+    gap: 16px;
+    padding: 14px 24px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 13.5px;
+    align-items: center;
+    transition: background 0.15s ease;
+  }
+  .scoreboard-row:first-child { border-top: none; }
+  .scoreboard-row:hover { background: var(--bg-subtle); }
+  .num { font-variant-numeric: tabular-nums; letter-spacing: -0.005em; }
+  .row-name { font-weight: 500; color: var(--text-primary); }
+  .row-rank {
+    display: inline-block; width: 22px; font-size: 10.5px; color: var(--text-quiet);
+    font-variant-numeric: tabular-nums; font-weight: 500;
+    text-align: right; margin-right: 12px; letter-spacing: 0.04em;
+  }
+  .text-right { text-align: right; }
+  .muted { color: var(--text-secondary); }
+  .pacing-good { color: var(--text-primary); font-weight: 500; }
+  .pacing-warn { color: var(--amber-700); font-weight: 500; }
+  .pacing-bad { color: var(--red-700); font-weight: 500; }
+  .metric-tag {
+    font-size: 10.5px; color: var(--text-quiet); margin-left: 2px;
+    font-weight: 400; letter-spacing: 0.02em;
+  }
+
+  /* HIGHLIGHTS GRID */
+  .highlight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .highlight-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+  }
+  .highlight-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .highlight-eyebrow { font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  .highlight-eyebrow.top { color: var(--teal-700); }
+  .highlight-eyebrow.focus { color: var(--amber-700); }
+  .highlight-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 18px; }
+  .highlight-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+  }
+  .highlight-item:last-child { margin-bottom: 0; }
+  .highlight-item.top { background: var(--teal-50); }
+  .highlight-item.focus { background: var(--amber-50); }
+  .highlight-item.intensify { background: var(--red-50); }
+  .highlight-name { font-size: 13.5px; font-weight: 500; letter-spacing: -0.005em; }
+  .highlight-sub { font-size: 11px; margin-top: 3px; letter-spacing: 0.005em; }
+  .highlight-value {
+    font-family: var(--font-serif);
+    font-size: 22px; font-weight: 400; letter-spacing: -0.015em;
+    line-height: 1;
+  }
+  .highlight-tag { font-size: 10.5px; margin-top: 4px; letter-spacing: 0.04em; }
+  .text-teal-900 { color: var(--teal-900); } .text-teal-700 { color: var(--teal-700); }
+  .text-amber-900 { color: var(--amber-900); } .text-amber-700 { color: var(--amber-700); }
+  .text-red-900 { color: var(--red-900); } .text-red-700 { color: var(--red-700); }
+
+  /* THEMES */
+  .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .theme-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.3rem 1.5rem;
+  }
+  .theme-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 14px; }
+  .theme-title {
+    font-size: 14px; font-weight: 500;
+    letter-spacing: -0.005em; color: var(--text-primary);
+  }
+  .theme-body { font-size: 12.5px; color: var(--text-secondary); line-height: 1.7; }
+  .theme-badge { font-size: 10.5px; padding: 3px 9px; border-radius: 100px; font-weight: 500; white-space: nowrap; letter-spacing: 0.02em; }
+  .badge-purple { background: var(--purple-50); color: var(--purple-700); }
+  .badge-amber { background: var(--amber-50); color: var(--amber-700); }
+  .badge-blue { background: var(--blue-50); color: var(--blue-700); }
+  .badge-teal { background: var(--teal-50); color: var(--teal-700); }
+
+  /* FOOTER */
+  .footer {
+    padding-top: 2rem; margin-top: 2rem;
+    border-top: 1px solid var(--border-strong);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; color: var(--text-tertiary); letter-spacing: 0.04em;
+  }
+  .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 13px; font-style: italic; color: var(--text-secondary); letter-spacing: 0;
+  }
+
+  /* PRINT */
+  @media print {
+    @page { size: A4 landscape; margin: 14mm; }
+    html, body { background: white !important; }
+    .container { padding: 0 !important; max-width: 100% !important; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; break-before: page; }
+    .avoid-break { page-break-inside: avoid; break-inside: avoid; }
+    .chart-card { height: 300px !important; }
+    .chart-card canvas { max-height: 250px !important; }
+    .header { padding-bottom: 1.25rem; margin-bottom: 1.5rem; }
+    .title { font-size: 30px; }
+    .section { margin-bottom: 1.5rem; }
+    .kpi-grid { margin-bottom: 1.75rem; }
+    .narrative { margin-bottom: 1.75rem; padding: 1.25rem 1.5rem; }
+    .narrative-text { font-size: 16px; }
+    .commentary-card, .highlight-card, .theme-card, .chart-card, .scoreboard, .scoreboard-row, .narrative { page-break-inside: avoid; break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .container { padding: 2rem 1.25rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .chart-grid, .highlight-grid, .theme-grid { grid-template-columns: 1fr; }
+    .scoreboard-head, .scoreboard-row { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 10px; padding: 12px 16px; font-size: 12px; }
+    .scoreboard-head > div:nth-child(5), .scoreboard-row > div:nth-child(5),
+    .scoreboard-head > div:nth-child(6), .scoreboard-row > div:nth-child(6) { display: none; }
+    .title { font-size: 30px; }
+    .header { flex-direction: column; gap: 1.25rem; }
+    .header-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header avoid-break">
+    <div class="header-left">
+      <div class="eyebrow">Portfolio performance · Week 21</div>
+      <h1 class="title">Paid media <em>check-in</em></h1>
+      <p class="subtitle">A weekly review of strategic actions, performance trajectory, and structural optimizations across nineteen actively managed accounts.</p>
+    </div>
+    <div class="header-right">
+      <button class="export-btn no-print" onclick="window.print()" aria-label="Export to PDF">
+        <i class="ti ti-download" aria-hidden="true"></i>
+        Export as PDF
+      </button>
+      <div class="meta-block">
+        <div><strong>Reporting period</strong></div>
+        <div style="margin-top: 4px;">18 – 24 May 2026</div>
+        <div style="margin-top: 2px;">MTD vs April benchmark</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="narrative avoid-break">
+    <div class="narrative-label">Executive summary</div>
+    <p class="narrative-text">The portfolio is <strong>performing strongly</strong> this week, with <strong>13 of 19 accounts</strong> hitting or exceeding their ROAS targets. Capital efficiency is improving across the board, with active structural optimizations underway in every monitored account — most notably the disciplined migration from all-asset PMax toward more controlled feed-only architectures.</p>
+  </div>
+
+  <section class="kpi-grid avoid-break">
+    <div class="kpi-card">
+      <div class="kpi-label">Total budget</div>
+      <div class="kpi-value">$493.6<span class="small">k</span></div>
+      <div class="kpi-meta">19 active accounts</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">MTD spend deployed</div>
+      <div class="kpi-value">$340.5<span class="small">k</span></div>
+      <div class="kpi-meta"><span class="kpi-trend trend-up"><i class="ti ti-trending-up" style="font-size:11px;" aria-hidden="true"></i>69.0%</span> of monthly target</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Median pacing</div>
+      <div class="kpi-value">95.2<span class="small">%</span></div>
+      <div class="kpi-meta">vs April benchmark</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Accounts on / above goal</div>
+      <div class="kpi-value">13<span class="small"> / 19</span></div>
+      <div class="kpi-meta"><span class="kpi-trend trend-up">68%</span> hitting targets</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">Account commentary</div>
+      <div class="section-meta">Verbatim from weekly check-in</div>
+    </div>
+    <div id="commentaryList" class="commentary-list"></div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="section">
+    <div class="chart-grid">
+      <div class="avoid-break">
+        <div class="section-header">
+          <div class="section-title">ROAS achievement</div>
+          <div class="section-meta">Actual vs target</div>
+        </div>
+        <div class="chart-card">
+          <canvas id="roasChart" role="img" aria-label="Scatter plot of actual ROAS versus target ROAS across 18 accounts">ROAS vs target across the portfolio.</canvas>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-dot" style="background:#2B9968;"></span>Exceeding</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#3B7AB8;"></span>On target</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#B57F1F;"></span>Monitoring</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#C4502F;"></span>Below target</span>
+          </div>
+        </div>
+      </div>
+      <div class="avoid-break">
+        <div class="section-header">
+          <div class="section-title">Budget pacing</div>
+          <div class="section-meta">% of monthly target deployed</div>
+        </div>
+        <div class="chart-card">
+          <canvas id="pacingChart" role="img" aria-label="Horizontal bar chart of pacing percentage by account ranked from lowest to highest">Pacing by account.</canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section avoid-break">
+    <div class="section-header">
+      <div class="section-title">Account scoreboard</div>
+      <div class="section-meta">Ranked by ROAS achievement</div>
+    </div>
+    <div class="scoreboard">
+      <div class="scoreboard-head">
+        <div>Account</div>
+        <div class="text-right">April target</div>
+        <div class="text-right">MTD spend</div>
+        <div class="text-right">Pacing</div>
+        <div class="text-right">ROAS · target</div>
+        <div class="text-right">Status</div>
+      </div>
+      <div id="accountRows"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="highlight-grid">
+      <div class="highlight-card avoid-break">
+        <div class="highlight-head">
+          <i class="ti ti-trending-up" style="font-size: 17px; color: var(--teal-500);" aria-hidden="true"></i>
+          <span class="highlight-eyebrow top">Strongest performers</span>
+        </div>
+        <div class="highlight-desc">Accounts materially exceeding ROAS targets — primary scaling candidates</div>
+        <div class="highlight-item top">
+          <div><div class="highlight-name text-teal-900">Lice Doctors</div><div class="highlight-sub text-teal-700">63 qualified conversions · 57.65% IS</div></div>
+          <div class="text-right"><div class="highlight-value text-teal-900">60.3</div><div class="highlight-tag text-teal-700">CPL · $40 goal</div></div>
+        </div>
+        <div class="highlight-item top">
+          <div><div class="highlight-name text-teal-900">Jeff Nippard</div><div class="highlight-sub text-teal-700">DSA-led · 15.55 MER</div></div>
+          <div class="text-right"><div class="highlight-value text-teal-900">4.2×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div>
+        </div>
+        <div class="highlight-item top">
+          <div><div class="highlight-name text-teal-900">Edge Lifestyle</div><div class="highlight-sub text-teal-700">Tech Joggers · 3× store avg CR</div></div>
+          <div class="text-right"><div class="highlight-value text-teal-900">3.0×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div>
+        </div>
+        <div class="highlight-item top">
+          <div><div class="highlight-name text-teal-900">Tie Boss</div><div class="highlight-sub text-teal-700">+120% conversion volume</div></div>
+          <div class="text-right"><div class="highlight-value text-teal-900">2.0×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div>
+        </div>
+      </div>
+
+      <div class="highlight-card avoid-break">
+        <div class="highlight-head">
+          <i class="ti ti-target-arrow" style="font-size: 17px; color: var(--amber-500);" aria-hidden="true"></i>
+          <span class="highlight-eyebrow focus">Active optimization</span>
+        </div>
+        <div class="highlight-desc">Below target but with documented corrective action in progress</div>
+        <div class="highlight-item focus">
+          <div><div class="highlight-name text-amber-900">Omegavia</div><div class="highlight-sub text-amber-700">PMax in learning · tROAS guardrails</div></div>
+          <div class="text-right"><div class="highlight-value text-amber-900">1.24</div><div class="highlight-tag text-amber-700">aMER · 1.5 goal</div></div>
+        </div>
+        <div class="highlight-item focus">
+          <div><div class="highlight-name text-amber-900">The Luxe Lens</div><div class="highlight-sub text-amber-700">Bing reduction · Google term porting</div></div>
+          <div class="text-right"><div class="highlight-value text-amber-900">1.58</div><div class="highlight-tag text-amber-700">MER · 1.65 goal</div></div>
+        </div>
+        <div class="highlight-item focus">
+          <div><div class="highlight-name text-amber-900">Playtex Baby</div><div class="highlight-sub text-amber-700">Consolidated to Feed-only NB</div></div>
+          <div class="text-right"><div class="highlight-value text-amber-900">1.39</div><div class="highlight-tag text-amber-700">ROAS · 1.5 goal</div></div>
+        </div>
+        <div class="highlight-item focus">
+          <div><div class="highlight-name text-amber-900">House of Leon</div><div class="highlight-sub text-amber-700">Memorial Day scaling · 7.59 TW ROAS</div></div>
+          <div class="text-right"><div class="highlight-value text-amber-900">5.10</div><div class="highlight-tag text-amber-700">MER · 9.20 goal</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">Structural themes</div>
+      <div class="section-meta">Portfolio-wide patterns this week</div>
+    </div>
+    <div class="theme-grid">
+      <div class="theme-card avoid-break">
+        <div class="theme-head">
+          <div class="theme-title">PMax → Feed-only migration</div>
+          <span class="theme-badge badge-purple">4 accounts</span>
+        </div>
+        <div class="theme-body">Iron Neck, Playtex, Thrival, and LumeCube are restructuring away from all-asset PMax toward Feed-only setups. Iron Neck found 28% of PMax budget wasted on Discovery network with zero transactions.</div>
+      </div>
+      <div class="theme-card avoid-break">
+        <div class="theme-head">
+          <div class="theme-title">Placement quality controls</div>
+          <span class="theme-badge badge-amber">2 accounts</span>
+        </div>
+        <div class="theme-body">POPFLEX required a manual purge of 6.6k junk YouTube placements. Iron Neck cited Discovery network waste. Pattern suggests a portfolio-level exclusion list could be standardized.</div>
+      </div>
+      <div class="theme-card avoid-break">
+        <div class="theme-head">
+          <div class="theme-title">Attribution reconciliation</div>
+          <span class="theme-badge badge-blue">Cross-portfolio</span>
+        </div>
+        <div class="theme-body">Simply Good Coffee flagged a growing reporting gap between Google platform data and Triple Whale. Cross-device attribution friction noted as a portfolio-wide measurement concern.</div>
+      </div>
+      <div class="theme-card avoid-break">
+        <div class="theme-head">
+          <div class="theme-title">Memorial Day activation</div>
+          <span class="theme-badge badge-teal">2 accounts</span>
+        </div>
+        <div class="theme-body">House of Leon hit 7.59 TW ROAS on $45k spend driven by Memorial Day creative. Chilly Goat saw CTR lift but zero high-ticket conversions, indicating warm-to-purchase velocity drop.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">WRK Marketing</div>
+    <div>Source: weekly check-in summary · 18 – 24 May 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  const accounts = [
+    { name: 'Jeff Nippard', target: 2000, spend: 1518.70, pacing: 104.93, roas: 12.65, tRoas: 3.0, metric: 'ROAS', status: 'top' },
+    { name: 'Lice Doctors', target: 18000, spend: 12654.32, pacing: 97.14, roas: 60.26, tRoas: 40, metric: 'CPL', status: 'top' },
+    { name: 'Chilly Goat Cold Tubs', target: 3000, spend: 2525.83, pacing: 116.34, roas: 4.50, tRoas: 3.0, metric: 'ROAS', status: 'top' },
+    { name: 'Edge Lifestyle', target: 3000, spend: 2143.10, pacing: 98.71, roas: 9.06, tRoas: 3.0, metric: 'ROAS', status: 'top' },
+    { name: 'Ilios Lighting', target: 4619.28, spend: 2953.84, pacing: 88.36, roas: 6.19, tRoas: 4.2, metric: 'MER', status: 'top' },
+    { name: 'Tie Boss', target: 13028.57, spend: 8832.69, pacing: 93.68, roas: 6.13, tRoas: 3.0, metric: 'ROAS', status: 'top' },
+    { name: 'POPFLEX', target: 40000, spend: 32790.55, pacing: 113.28, roas: 6.42, tRoas: 3.0, metric: 'ROAS', status: 'top' },
+    { name: 'Baboon To The Moon', target: 14570, spend: 10033.47, pacing: 95.16, roas: 7.63, tRoas: 8.0, metric: 'B ROAS', status: 'monitor' },
+    { name: 'Out of Print Clothing', target: 18000, spend: 11227.83, pacing: 86.19, roas: 3.58, tRoas: 3.0, metric: 'NB ROAS', status: 'on-target' },
+    { name: 'Iron Neck', target: 15200, spend: 9627.75, pacing: 87.53, roas: 3.13, tRoas: 3.0, metric: 'MER', status: 'on-target' },
+    { name: 'Meditac Kits', target: 20000, spend: 16843.50, pacing: 116.37, roas: 3.00, tRoas: 3.0, metric: 'ROAS', status: 'on-target' },
+    { name: 'Thrival', target: 5000, spend: 2238.86, pacing: 61.87, roas: 1.63, tRoas: 1.5, metric: 'ROAS', status: 'on-target' },
+    { name: 'Simply Good Coffee', target: 120000, spend: 97195.09, pacing: 111.92, roas: 2.56, tRoas: 2.5, metric: 'ROAS', status: 'on-target' },
+    { name: 'LumeCube', target: 65968, spend: 35873.81, pacing: 75.14, roas: 3.41, tRoas: 5.0, metric: 'MER', status: 'monitor' },
+    { name: 'House of Leon', target: 121184, spend: 73598.76, pacing: 83.92, roas: 5.10, tRoas: 9.2, metric: 'MER', status: 'attention' },
+    { name: 'The Luxe Lens', target: 20000, spend: 14730.98, pacing: 101.78, roas: 1.58, tRoas: 1.65, metric: 'MER', status: 'attention' },
+    { name: 'Playtex Baby', target: 5000, spend: 2534.56, pacing: 70.05, roas: 1.39, tRoas: 1.5, metric: 'ROAS', status: 'attention' },
+    { name: 'Omegavia', target: 5000, spend: 3137.36, pacing: 86.71, roas: 1.24, tRoas: 1.5, metric: 'aMER', status: 'attention' },
+  ];
+
+  const statusStyles = {
+    'top': { cls: 'pill-top', label: 'Exceeding' },
+    'on-target': { cls: 'pill-on', label: 'On target' },
+    'monitor': { cls: 'pill-monitor', label: 'Monitoring' },
+    'attention': { cls: 'pill-attention', label: 'Optimizing' },
+  };
+
+  const ranked = [...accounts].sort((a, b) => (b.roas / b.tRoas) - (a.roas / a.tRoas));
+  const rowsHtml = ranked.map((a, i) => {
+    const s = statusStyles[a.status];
+    const fmtSpend = '$' + a.spend.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    const fmtTarget = '$' + a.target.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    const pacingClass = a.pacing >= 95 ? 'pacing-good' : a.pacing >= 75 ? 'pacing-warn' : 'pacing-bad';
+    const roasDisplay = a.metric === 'CPL' ? a.roas.toFixed(0) + ' / ' + a.tRoas : a.roas.toFixed(2) + ' / ' + a.tRoas.toFixed(1);
+    const rank = String(i + 1).padStart(2, '0');
+    return `<div class="scoreboard-row">
+      <div class="row-name"><span class="row-rank">${rank}</span>${a.name}</div>
+      <div class="text-right muted num">${fmtTarget}</div>
+      <div class="text-right muted num">${fmtSpend}</div>
+      <div class="text-right num ${pacingClass}">${a.pacing.toFixed(1)}%</div>
+      <div class="text-right num muted">${roasDisplay} <span class="metric-tag">${a.metric}</span></div>
+      <div class="text-right"><span class="pill ${s.cls}">${s.label}</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('accountRows').innerHTML = rowsHtml;
+
+  const commentaries = [
+    { name: 'Baboon To The Moon', target: '$14,570', spend: '$10,033.47', pacing: '95.16%', roasLine: '3.00 NB / 8.00 B target · 7.63 actual', tone: 'monitor',
+      insight: `We're currently pivoting hard toward volume acquisition based on the client's new priorities, meaning we're willingly absorbing a temporary efficiency drop to scale overall store revenue. While broader DTC conversion has seen some friction recently, our core collection in Shopping Non-Brand is doing heavy lifting to sustain our baseline volume. The natural side effect of this volume push is a compressed platform ROAS, as the algorithm inevitably expands targeting into lower-intent audiences. Moving forward, we'll maintain this expansion window but add tiered tROAS guardrails on top SKUs to keep efficiency from bottoming out.` },
+    { name: 'Meditac Kits', target: '$20,000', spend: '$16,843.50', pacing: '116.37%', roasLine: '3.00 target · 3.00 actual', tone: 'on-target',
+      insight: `Account efficiency is holding steady and tracking nicely against our designated profitability targets. The "Top Performing Products" Shopping structure continues to be our anchor here, bringing in consistent, intent-driven transactional volume. We are seeing a bit of impression share volatility on high-level search terms, which is causing minor day-to-day fluctuations in our blended CPA. To stabilize this, our next move is to roll out targeted exact-match search campaigns for high-margin kits, which should secure a much more predictable impression share floor.` },
+    { name: 'House of Leon', target: '$121,184', spend: '$73,598.76', pacing: '83.92%', roasLine: '3.0× ROAS / 9.20 MER target · 5.10 actual', tone: 'attention',
+      insight: `We're seeing excellent capital efficiency this week, holding a strong 7.59 Triple Whale ROAS on $45k in monthly spend. The launch of the Memorial Day Sale creative really accelerated purchase velocity, proving there's still great seasonal demand for this high-ticket catalog. One thing to watch: the scaled budget is currently favoring legacy collections, leaving newer furniture lines underexposed. To fix this, we're going to aggressively scale the active Memorial Day promo assets while separating out the high-performing Outdoor PMAX elements to ensure a cleaner budget distribution.` },
+    { name: 'Ilios Lighting', target: '$4,619.28', spend: '$2,953.84', pacing: '88.36%', roasLine: '4.2 MER target · 6.19 actual', tone: 'top',
+      insight: `Performance is exceptionally strong right now, highlighted by a dominant 5.63 Triple Whale ROAS driven by hyper-targeted product demand. The "5x Deluxe Mirror" is the absolute standout, delivering an elite 6.60x ROAS via standard product search structures. On the flip side, the "Beauty Ring Mirror" is showing severe efficiency decay and heavily diluting our blended performance. We need to immediately reallocate surplus budget away from the Beauty Ring and funnel that capital directly into the surging Deluxe Mirror campaign.` },
+    { name: 'Iron Neck', target: '$15,200', spend: '$9,627.75', pacing: '87.53%', roasLine: '3.0× MER · Brand 15× / NB 1.0–1.25× · 3.13 actual', tone: 'on-target',
+      insight: `We successfully pushed spend to $3,072.97 this week while maintaining a solid 3.66 Triple Whale ROAS. Brand and core remarketing networks are delivering great closing conversion rates, which is keeping the overall efficiency floor highly stable. However, a deep dive into placements showed that the core Iron Neck 3.0 & Pro PMAX campaign wasted 28% of its budget on the Discovery network without generating a single transaction. To stop this bleed, we're transitioning away from all-asset PMAX structures and moving to a streamlined Feed-Only PMAX setup.` },
+    { name: 'LumeCube', target: '$65,968', spend: '$35,873.81', pacing: '75.14%', roasLine: '5.0 MER target · 3.41 actual', tone: 'monitor',
+      insight: `Spend hit $10,879.04 this week with a stable 3.42 Triple Whale ROAS, even with our ongoing inventory limitations. We ran a structural test and found an interesting variance: the Ring Light Pro peaks in efficiency under a Feed-Only setup, while the Edge Light 2.0 actually needs an All-Assets campaign format to properly stimulate market demand. Out-of-stock hurdles on core SKUs are still our main bottleneck for scaling further. Our next step is to segment the account into distinct asset-based and feed-only architectures based on these item requirements, focusing our active spend entirely on highly stocked inventory.` },
+    { name: 'Playtex Baby', target: '$5,000', spend: '$2,534.56', pacing: '70.05%', roasLine: '1.5× target · 1.39 actual', tone: 'attention',
+      insight: `We've successfully stabilized blended efficiency at a 1.46 Triple Whale ROAS after making some highly necessary structural simplifications. Stripping things back to a clean Non-Brand Standard Shopping "Feed Only" approach successfully cut out the low-intent algorithmic exploration. Meanwhile, the legacy Wearable Breast Pump PMAX campaign completely dried up, spending budget without a single conversion over the latest window. We're officially pausing that underperforming PMAX structure and consolidating all Non-Brand capital into our proven Standard Shopping feed.` },
+    { name: 'POPFLEX', target: '$40,000', spend: '$32,790.55', pacing: '113.28%', roasLine: '3.0 ROAS / 8.60 aMER target · 6.42 actual', tone: 'top',
+      insight: `The account's scaling trajectory continues to look incredible, pushing $10,345.68 in weekly budget at an elite 5.16 platform ROAS. The PMAX "Catch All Products" campaign is performing exceptionally well, pulling a 6.25 Triple Whale ROAS by effectively unearthing long-tail catalog demand. The main issue we're fighting is algorithmic video distribution quality; we had to do a heavy manual purge of over 6.6k junk YouTube placements to protect traffic integrity. We'll keep scaling the highly efficient Swim Shop and Sleeves/Shrugs categories while staying very aggressive on those placement exclusions.` },
+    { name: 'Simply Good Coffee, Inc.', target: '$120,000', spend: '$97,195.09', pacing: '111.92%', roasLine: '3 MER / 2.5 ROAS target · 2.56 actual', tone: 'on-target',
+      insight: `The account easily absorbed an escalated $36,519.96 in weekly spend while holding a very robust 3.85 Triple Whale ROAS. Search Non-Brand is proving to be a premium acquisition engine, delivering a 6.91 Triple Whale ROAS on the back of high-intent keywords like "plastic free coffee maker". We are noticing a growing reporting gap between Google platform data and Triple Whale, pointing to cross-device attribution friction that could obscure our view of macro trends. We'll continue leaning heavily into health-conscious and eco-friendly queries, using Triple Whale as our primary source of truth for budget scaling decisions.` },
+    { name: 'The Luxe Lens', target: '$20,000', spend: '$14,730.98', pacing: '101.78%', roasLine: '1.40 ROAS / 1.65 MER target · 1.58 actual', tone: 'attention',
+      insight: `Overall efficiency is feeling a little pressure right now. The core AI Presets PMAX campaign is driving the bulk of revenue at a 1.88 ROAS, but it's compressing our overall margins. Thankfully, high-intent search campaigns remain super reliable and are anchoring our volume during mid-week shopping peaks. Bing Ads, however, cratered to a critical 0.96 ROAS as expanded match types pulled in highly unqualified clicks. We are drastically reducing Bing Ads exposure to defend efficiency and porting the best exact-match terms from Google into specialized, low-funnel ad groups.` },
+    { name: 'Thrival', target: '$5,000', spend: '$2,238.86', pacing: '61.87%', roasLine: '1.5 target · 1.63 actual', tone: 'on-target',
+      insight: `Performance is holding steady at a 2.88 ROAS, navigating some top-of-funnel conversion friction caused by a broader performance slowdown across Meta channels. In this specific niche, Standard Shopping continues to demonstrate superior structural efficiency, historically outperforming PMAX by about 3x. Our Non-Brand PMAX campaigns essentially lost all conversion velocity and started burning budget on broad audience discovery with zero return. We're immediately deactivating those inefficient Non-Brand PMAX structures and routing that capital back into our highly predictable Standard Shopping funnels.` },
+    { name: 'Tie Boss', target: '$13,028.57', spend: '$8,832.69', pacing: '93.68%', roasLine: '3.0 ROAS / 4.64 MER target · 6.13 actual', tone: 'top',
+      insight: `We're seeing excellent momentum here, holding a strong 6.54 Triple Whale ROAS while our scaling efforts drove a 120% increase in conversion volume. The tactical call to scale up the Non-Brand budget paid off beautifully, with both the "Tie Down Rope" and "Hard Top Sling" PMAX campaigns scaling efficiently. The only downside to this volume push is that it's attracting aggressive competitor counter-bidding, lifting our core CPCs by 10% week-over-week. We'll maintain our offensive scaling posture on top verticals but implement target CPA constraints to keep competitor pressure from eating our margins.` },
+    { name: 'Chilly Goat Cold Tubs', target: '$3,000', spend: '$2,525.83', pacing: '116.34%', roasLine: '3.00 target · 4.50 actual', tone: 'top',
+      insight: `The account deployed $1,053.93 this week with a strong 10.59 Google ROAS and an 11.61 MER, though raw purchase volume is still somewhat constrained. The Memorial Day Sale messaging did a great job improving low-funnel engagement and CTR across our warm remarketing audiences. However, despite the high blended ROAS, we didn't record any high-ticket cold tub conversions over the last 7 days, indicating a drop-off in cold-to-warm conversion velocity. We're intentionally scaling back daily spend to perfectly protect the $3,000 monthly budget ceiling while updating core search terms to capture higher-intent "cold plunge" queries.` },
+    { name: 'Edge Lifestyle', target: '$3,000', spend: '$2,143.10', pacing: '98.71%', roasLine: '3.00 target · 9.06 actual', tone: 'top',
+      insight: `Performance remains exceptional, boasting a dominant 9.87 platform ROAS driven by a highly successful product drop. The Spring Drop momentum is in full swing, with the Tech Joggers collection maintaining a conversion rate that is 3x higher than the store average. We are seeing some structural decay in broad generic search categories like "mens pants," which are driving up blended CPA without bringing in net-new customers. We're going to aggressively restrict spend on those broad terms and reallocate the surplus entirely into high-intent niche clusters like "linen pants" and "cargo joggers."` },
+    { name: 'Jeff Nippard', target: '$2,000', spend: '$1,518.70', pacing: '104.93%', roasLine: '3.00 target · 12.65 actual', tone: 'top',
+      insight: `This account continues to deliver elite-tier metrics, maintaining an 11.13 Google ROAS, an 11.21 Triple Whale ROAS, and a massive 15.55 MER on $515.49 in spend. Dynamic Search Ads (DSA) remain our absolute best acquisition engine, and a massive Non-Brand conversion surge on May 17 pushed a peak 4.31 daily ROAS. We are seeing a severe efficiency decline on some legacy generic keywords, which is dragging down the overall Non-Brand momentum. We're going to formally pause underperforming terms like "body building program" and "gym training workout," shifting that budget to fuel the highly efficient DSA search structures.` },
+    { name: 'Lice Doctors', target: '$18,000', spend: '$12,654.32', pacing: '97.14%', roasLine: 'CPL $40 target · 60.26 actual', tone: 'top',
+      insight: `We spent $4,344.14 this week, capturing 63 qualified conversions at a stable $68.96 CPL while securing an elite 57.65% Search Impression Share. The decision to pause landing page split-testing was definitely the right call; it completely re-stabilized baseline conversion rates across our core metro markets. A deep dive into search terms did reveal that low-intent, informational queries are eating up budget without driving phone calls. We're executing a massive negative keyword clean-up to block broad strings like "lice exterminator" and "lice screening near me" to protect budget for urgent, local searches.` },
+    { name: 'Omegavia', target: '$5,000', spend: '$3,137.36', pacing: '86.71%', roasLine: '1.5 aMER target · 1.24 actual', tone: 'attention',
+      insight: `We're seeing solid signs of recovery, anchored by a strong 8.21 blended aMER and a major 40% efficiency rebound in Standard Shopping. Shopping bounced back to a 3.46 ROAS, proving that core item matching is still highly effective for capturing immediate market demand. On the flip side, the newly launched PMAX and Search Non-Brand expansion campaigns are still in an aggressive learning phase, driving up immediate CPA as they test wider audiences. We'll let these expansion structures stabilize under tight tROAS constraints while leaning heavily on Standard Shopping as our primary revenue anchor.` },
+    { name: 'Out of Print Clothing', target: '$18,000', spend: '$11,227.83', pacing: '86.19%', roasLine: '4 MER / 3.0 NB ROAS target · 3.58 actual', tone: 'on-target',
+      insight: `Performance remains healthy and stable with a 3.68 Triple Whale ROAS and a balanced budget distribution across the catalog. The "Richard Scarry" collection gained massive organic and paid momentum this week, and the core Socks collection saw a really strong efficiency rebound. Broad seasonal apparel categories are dealing with steep auction competition right now, driving up baseline CPCs across standard T-shirt campaigns. To adjust, we'll dynamically shift budget away from those highly competitive generic categories and channel funds into expanding the hot Richard Scarry and Socks asset groups.` },
+  ];
+
+  const toneMap = {
+    'top': { cls: 'pill-top', label: 'Exceeding', iconColor: '#2B9968' },
+    'on-target': { cls: 'pill-on', label: 'On target', iconColor: '#3B7AB8' },
+    'monitor': { cls: 'pill-monitor', label: 'Monitoring', iconColor: '#B57F1F' },
+    'attention': { cls: 'pill-attention', label: 'Optimizing', iconColor: '#C4502F' },
+  };
+
+  const commentaryHtml = commentaries.map(c => {
+    const t = toneMap[c.tone];
+    return `<div class="commentary-card tone-${c.tone === 'on-target' ? 'on' : c.tone} avoid-break">
+      <div class="commentary-head">
+        <div class="commentary-id">
+          <div class="commentary-name">${c.name}</div>
+          <span class="pill ${t.cls}">${t.label}</span>
+        </div>
+        <div class="commentary-stats">
+          <span><strong>Target</strong> ${c.target}</span>
+          <span class="stat-divider">·</span>
+          <span><strong>Spend</strong> ${c.spend}</span>
+          <span class="stat-divider">·</span>
+          <span><strong>Pacing</strong> ${c.pacing}</span>
+        </div>
+      </div>
+      <div class="commentary-body">${c.insight}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('commentaryList').innerHTML = commentaryHtml;
+
+  const textColor = '#56544E';
+  const gridColor = 'rgba(0,0,0,0.05)';
+  const statusColors = {
+    'top': '#2B9968', 'on-target': '#3B7AB8',
+    'monitor': '#B57F1F', 'attention': '#C4502F',
+  };
+
+  const scatterData = accounts.filter(a => a.metric !== 'CPL').map(a => ({
+    x: a.tRoas, y: a.roas, label: a.name, status: a.status,
+  }));
+
+  new Chart(document.getElementById('roasChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Accounts',
+        data: scatterData,
+        backgroundColor: scatterData.map(d => statusColors[d.status]),
+        borderColor: scatterData.map(d => statusColors[d.status]),
+        pointRadius: 7, pointHoverRadius: 10,
+        pointBorderColor: '#fff', pointBorderWidth: 1.5,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, layout: { padding: 12 },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1A1814', titleFont: { size: 12, weight: '500', family: 'Inter' },
+          bodyFont: { size: 12, family: 'Inter' },
+          padding: 12, cornerRadius: 6, displayColors: false,
+          callbacks: { label: (ctx) => `${ctx.raw.label}: ${ctx.raw.y}× / ${ctx.raw.x}× target` },
+        },
+      },
+      scales: {
+        x: { title: { display: true, text: 'Target ROAS / MER', color: textColor, font: { size: 11, family: 'Inter' } }, grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11, family: 'Inter' } }, min: 0, max: 10 },
+        y: { title: { display: true, text: 'Actual ROAS / MER', color: textColor, font: { size: 11, family: 'Inter' } }, grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11, family: 'Inter' } }, min: 0, max: 14 },
+      },
+    },
+  });
+
+  const pacingSorted = [...accounts].sort((a, b) => a.pacing - b.pacing);
+  const pacingColors = pacingSorted.map(a => {
+    if (a.pacing >= 100) return '#2B9968';
+    if (a.pacing >= 90) return '#3B7AB8';
+    if (a.pacing >= 75) return '#B57F1F';
+    return '#C4502F';
+  });
+
+  new Chart(document.getElementById('pacingChart'), {
+    type: 'bar',
+    data: {
+      labels: pacingSorted.map(a => a.name),
+      datasets: [{
+        data: pacingSorted.map(a => Math.round(a.pacing * 10) / 10),
+        backgroundColor: pacingColors, borderColor: pacingColors,
+        borderWidth: 0, barThickness: 10, borderRadius: 2,
+      }],
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      layout: { padding: { left: 4, right: 24, top: 4, bottom: 4 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1A1814', titleFont: { size: 12, weight: '500', family: 'Inter' },
+          bodyFont: { size: 12, family: 'Inter' },
+          padding: 12, cornerRadius: 6, displayColors: false,
+          callbacks: { label: (ctx) => `${ctx.parsed.x}% of target deployed` },
+        },
+      },
+      scales: {
+        x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 10, family: 'Inter' }, callback: (v) => v + '%' }, max: 130 },
+        y: { grid: { display: false }, ticks: { color: textColor, font: { size: 10, family: 'Inter' } } },
+      },
+    },
+  });
+</script>
+
+</body>
+</html>
