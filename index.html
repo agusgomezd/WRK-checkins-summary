@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WRK Marketing — Portfolio Check-in · Week 23 (1–7 June 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-page:#F7F5F0; --bg-surface:#FFFFFF; --bg-muted:#F1EFE8; --bg-subtle:#FBFAF6;
+    --text-primary:#1A1814; --text-secondary:#56544E; --text-tertiary:#8A877E; --text-quiet:#B8B5AA;
+    --border-subtle:rgba(0,0,0,0.06); --border-medium:rgba(0,0,0,0.1); --border-strong:rgba(0,0,0,0.16);
+    --teal-50:#E8F4EE; --teal-500:#2B9968; --teal-700:#105C3D; --teal-900:#08382A;
+    --blue-50:#EAF1F9; --blue-500:#3B7AB8; --blue-700:#1F4F86; --blue-900:#102E51;
+    --amber-50:#F8EFDC; --amber-500:#B57F1F; --amber-700:#7A5410; --amber-900:#4A3208;
+    --red-50:#F8E8E5; --red-500:#C4502F; --red-700:#863319; --red-900:#4F1D0C;
+    --purple-50:#EFEDF8; --purple-700:#3F3585;
+    --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-xl:16px;
+    --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --font-serif:'Fraunces',Georgia,serif;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { background:var(--bg-page); }
+  body { font-family:var(--font-sans); font-size:14px; line-height:1.6; color:var(--text-primary); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; font-feature-settings:'ss01','cv11'; letter-spacing:-0.005em; }
+  .container { max-width:1200px; margin:0 auto; padding:3.5rem 3rem 4rem; }
+
+  .header { display:flex; justify-content:space-between; align-items:flex-start; padding-bottom:2rem; border-bottom:1px solid var(--border-strong); margin-bottom:2.5rem; }
+  .header-left { max-width:720px; }
+  .eyebrow { font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--text-tertiary); font-weight:500; display:inline-flex; align-items:center; gap:10px; }
+  .eyebrow::before { content:''; width:24px; height:1px; background:var(--text-tertiary); }
+  .title { font-family:var(--font-serif); font-size:44px; font-weight:400; letter-spacing:-0.02em; line-height:1.05; margin-top:14px; color:var(--text-primary); }
+  .title em { font-style:italic; font-weight:300; color:var(--text-secondary); }
+  .subtitle { font-size:14px; color:var(--text-secondary); margin-top:14px; max-width:560px; line-height:1.55; }
+  .header-right { text-align:right; padding-top:4px; }
+  .export-btn { background:var(--text-primary); color:var(--bg-surface); border:none; padding:11px 18px; border-radius:var(--radius-md); font-size:12px; font-weight:500; cursor:pointer; display:inline-flex; align-items:center; gap:8px; font-family:var(--font-sans); letter-spacing:0.02em; transition:opacity .2s ease,transform .1s ease; }
+  .export-btn:hover { opacity:.82; } .export-btn:active { transform:scale(.98); }
+  .meta-block { margin-top:16px; font-size:11px; color:var(--text-tertiary); letter-spacing:0.06em; }
+  .meta-block strong { color:var(--text-secondary); font-weight:500; letter-spacing:0.02em; }
+
+  .narrative { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.75rem 2rem; margin-bottom:2.5rem; position:relative; overflow:hidden; }
+  .narrative::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--amber-500); }
+  .narrative-label { font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber-700); font-weight:500; margin-bottom:10px; }
+  .narrative-text { font-family:var(--font-serif); font-size:19px; font-weight:300; line-height:1.5; color:var(--text-primary); letter-spacing:-0.01em; }
+  .narrative-text strong { font-weight:500; font-style:normal; color:var(--text-primary); }
+
+  .kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-bottom:3rem; background:var(--border-medium); border:1px solid var(--border-medium); border-radius:var(--radius-lg); overflow:hidden; }
+  .kpi-card { background:var(--bg-surface); padding:1.4rem 1.5rem; }
+  .kpi-label { font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:14px; font-weight:500; }
+  .kpi-value { font-family:var(--font-serif); font-size:36px; font-weight:400; letter-spacing:-0.025em; line-height:1; color:var(--text-primary); }
+  .kpi-meta { font-size:12px; color:var(--text-secondary); margin-top:10px; display:flex; align-items:center; gap:6px; }
+  .kpi-value .small { font-size:22px; color:var(--text-quiet); font-weight:300; }
+  .kpi-trend { display:inline-flex; align-items:center; gap:3px; font-size:11px; padding:2px 7px; border-radius:4px; font-variant-numeric:tabular-nums; font-weight:500; }
+  .trend-up { background:var(--teal-50); color:var(--teal-700); }
+  .trend-flat { background:var(--bg-muted); color:var(--text-secondary); }
+
+  .section { margin-bottom:3rem; }
+  .section-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--border-subtle); }
+  .section-title { font-family:var(--font-serif); font-size:22px; font-weight:400; letter-spacing:-0.015em; color:var(--text-primary); }
+  .section-meta { font-size:11px; color:var(--text-tertiary); letter-spacing:0.06em; text-transform:uppercase; font-weight:500; }
+
+  .commentary-list { display:flex; flex-direction:column; gap:12px; }
+  .commentary-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:18px 22px; transition:border-color .15s ease; position:relative; }
+  .commentary-card:hover { border-color:var(--border-medium); }
+  .commentary-card::before { content:''; position:absolute; left:0; top:18px; bottom:18px; width:2px; border-radius:0 2px 2px 0; }
+  .commentary-card.tone-top::before { background:var(--teal-500); }
+  .commentary-card.tone-on::before { background:var(--blue-500); }
+  .commentary-card.tone-monitor::before { background:var(--amber-500); }
+  .commentary-card.tone-attention::before { background:var(--red-500); }
+  .commentary-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px; gap:14px; flex-wrap:wrap; }
+  .commentary-id { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .commentary-name { font-size:15px; font-weight:500; letter-spacing:-0.005em; color:var(--text-primary); }
+  .commentary-stats { font-size:11.5px; color:var(--text-tertiary); font-variant-numeric:tabular-nums; letter-spacing:0.02em; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .commentary-stats .stat-divider { color:var(--text-quiet); }
+  .commentary-stats strong { color:var(--text-secondary); font-weight:500; }
+  .commentary-body { font-size:13.5px; color:var(--text-secondary); line-height:1.7; letter-spacing:-0.003em; }
+
+  .pill { font-size:10.5px; padding:3px 9px; border-radius:100px; font-weight:500; letter-spacing:0.03em; white-space:nowrap; text-transform:uppercase; display:inline-flex; align-items:center; gap:5px; }
+  .pill::before { content:''; width:5px; height:5px; border-radius:50%; }
+  .pill-top { background:var(--teal-50); color:var(--teal-700); } .pill-top::before { background:var(--teal-500); }
+  .pill-on { background:var(--blue-50); color:var(--blue-700); } .pill-on::before { background:var(--blue-500); }
+  .pill-monitor { background:var(--amber-50); color:var(--amber-700); } .pill-monitor::before { background:var(--amber-500); }
+  .pill-attention { background:var(--red-50); color:var(--red-700); } .pill-attention::before { background:var(--red-500); }
+
+  .chart-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .chart-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.5rem; position:relative; height:400px; }
+  .chart-card canvas { max-height:300px; }
+  .chart-note { font-size:10.5px; color:var(--text-quiet); margin-top:12px; line-height:1.5; letter-spacing:0.01em; }
+  .chart-legend { display:flex; flex-wrap:wrap; gap:16px; margin-top:12px; font-size:11px; color:var(--text-secondary); }
+  .legend-item { display:flex; align-items:center; gap:6px; }
+  .legend-dot { width:8px; height:8px; border-radius:2px; }
+
+  .scoreboard { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); overflow:hidden; }
+  .scoreboard-head { display:grid; grid-template-columns:1.9fr 1.1fr 0.9fr 1.3fr 1.1fr 0.95fr; gap:14px; padding:14px 22px; background:var(--bg-subtle); border-bottom:1px solid var(--border-subtle); font-size:10px; letter-spacing:0.09em; text-transform:uppercase; color:var(--text-tertiary); font-weight:500; }
+  .scoreboard-row { display:grid; grid-template-columns:1.9fr 1.1fr 0.9fr 1.3fr 1.1fr 0.95fr; gap:14px; padding:13px 22px; border-top:1px solid var(--border-subtle); font-size:13px; align-items:center; transition:background .15s ease; }
+  .scoreboard-row:first-child { border-top:none; } .scoreboard-row:hover { background:var(--bg-subtle); }
+  .num { font-variant-numeric:tabular-nums; letter-spacing:-0.005em; }
+  .row-name { font-weight:500; color:var(--text-primary); }
+  .row-rank { display:inline-block; width:20px; font-size:10px; color:var(--text-quiet); font-variant-numeric:tabular-nums; font-weight:500; text-align:right; margin-right:10px; letter-spacing:0.04em; }
+  .text-right { text-align:right; } .muted { color:var(--text-secondary); }
+  .pacing-good { color:var(--text-primary); font-weight:500; } .pacing-warn { color:var(--amber-700); font-weight:500; } .pacing-bad { color:var(--red-700); font-weight:500; }
+  .roas-split { font-variant-numeric:tabular-nums; }
+  .roas-plat { color:var(--text-tertiary); } .roas-rep { color:var(--text-primary); font-weight:500; }
+  .metric-tag { font-size:10px; color:var(--text-quiet); margin-left:2px; font-weight:400; }
+
+  .highlight-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .highlight-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.5rem 1.75rem; }
+  .highlight-head { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .highlight-eyebrow { font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; font-weight:500; }
+  .highlight-eyebrow.top { color:var(--teal-700); } .highlight-eyebrow.focus { color:var(--amber-700); }
+  .highlight-desc { font-size:12px; color:var(--text-secondary); margin-bottom:18px; }
+  .highlight-item { display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-radius:var(--radius-md); margin-bottom:10px; }
+  .highlight-item:last-child { margin-bottom:0; }
+  .highlight-item.top { background:var(--teal-50); } .highlight-item.focus { background:var(--amber-50); }
+  .highlight-name { font-size:13.5px; font-weight:500; letter-spacing:-0.005em; }
+  .highlight-sub { font-size:11px; margin-top:3px; letter-spacing:0.005em; }
+  .highlight-value { font-family:var(--font-serif); font-size:22px; font-weight:400; letter-spacing:-0.015em; line-height:1; }
+  .highlight-tag { font-size:10.5px; margin-top:4px; letter-spacing:0.04em; }
+  .text-teal-900 { color:var(--teal-900); } .text-teal-700 { color:var(--teal-700); }
+  .text-amber-900 { color:var(--amber-900); } .text-amber-700 { color:var(--amber-700); }
+
+  .theme-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .theme-card { background:var(--bg-surface); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:1.3rem 1.5rem; }
+  .theme-head { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; gap:14px; }
+  .theme-title { font-size:14px; font-weight:500; letter-spacing:-0.005em; color:var(--text-primary); }
+  .theme-body { font-size:12.5px; color:var(--text-secondary); line-height:1.7; }
+  .theme-badge { font-size:10.5px; padding:3px 9px; border-radius:100px; font-weight:500; white-space:nowrap; letter-spacing:0.02em; }
+  .badge-purple { background:var(--purple-50); color:var(--purple-700); }
+  .badge-amber { background:var(--amber-50); color:var(--amber-700); }
+  .badge-blue { background:var(--blue-50); color:var(--blue-700); }
+  .badge-teal { background:var(--teal-50); color:var(--teal-700); }
+  .badge-red { background:var(--red-50); color:var(--red-700); }
+
+  .footer { padding-top:2rem; margin-top:2rem; border-top:1px solid var(--border-strong); display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--text-tertiary); letter-spacing:0.04em; gap:16px; flex-wrap:wrap; }
+  .footer-brand { font-family:var(--font-serif); font-size:13px; font-style:italic; color:var(--text-secondary); letter-spacing:0; }
+  .footnote { font-size:10.5px; color:var(--text-quiet); line-height:1.6; margin-top:14px; padding:14px 18px; background:var(--bg-muted); border-radius:var(--radius-md); letter-spacing:0.01em; }
+
+  @media print {
+    @page { size:A4 landscape; margin:14mm; }
+    html, body { background:white !important; }
+    .container { padding:0 !important; max-width:100% !important; }
+    .no-print { display:none !important; }
+    .page-break { page-break-before:always; break-before:page; }
+    .avoid-break { page-break-inside:avoid; break-inside:avoid; }
+    .chart-card { height:320px !important; } .chart-card canvas { max-height:250px !important; }
+    .header { padding-bottom:1.25rem; margin-bottom:1.5rem; } .title { font-size:30px; }
+    .section { margin-bottom:1.5rem; } .kpi-grid { margin-bottom:1.75rem; }
+    .narrative { margin-bottom:1.75rem; padding:1.25rem 1.5rem; } .narrative-text { font-size:16px; }
+    .commentary-card, .highlight-card, .theme-card, .chart-card, .scoreboard, .scoreboard-row, .narrative { page-break-inside:avoid; break-inside:avoid; }
+  }
+  @media (max-width:960px) {
+    .container { padding:2rem 1.25rem; }
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    .chart-grid, .highlight-grid, .theme-grid { grid-template-columns:1fr; }
+    .scoreboard-head, .scoreboard-row { grid-template-columns:1.6fr 1fr 1.1fr 0.9fr; gap:10px; padding:12px 16px; font-size:12px; }
+    .scoreboard-head > div:nth-child(2), .scoreboard-row > div:nth-child(2), .scoreboard-head > div:nth-child(3), .scoreboard-row > div:nth-child(3) { display:none; }
+    .title { font-size:30px; } .header { flex-direction:column; gap:1.25rem; } .header-right { text-align:left; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header avoid-break">
+    <div class="header-left">
+      <div class="eyebrow">Portfolio performance · Week 23</div>
+      <h1 class="title">Paid media <em>check-in</em></h1>
+      <p class="subtitle">A weekly review of strategic actions, performance trajectory, and structural optimizations across seventeen actively managed accounts.</p>
+    </div>
+    <div class="header-right">
+      <button class="export-btn no-print" onclick="window.print()" aria-label="Export to PDF"><i class="ti ti-download" aria-hidden="true"></i>Export as PDF</button>
+      <div class="meta-block">
+        <div><strong>Reporting period</strong></div>
+        <div style="margin-top:4px;">1 – 7 June 2026</div>
+        <div style="margin-top:2px;">First week of June cycle</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="narrative avoid-break">
+    <div class="narrative-label">Executive summary</div>
+    <p class="narrative-text">An efficiency-turbulent <strong>scaling week</strong>. The team pushed spend across much of the portfolio: the disciplined scalers — <strong>Baboon, Ilios, Iron Neck</strong> — turned it into real volume, while several accounts hit diminishing returns and are already pulling budgets back and auditing. Absolute ROAS holds at or above target for <strong>12 of 17 accounts</strong>, but <strong>House of Leon</strong> is the clear priority, where a 35% spend increase spiked CPA to $409. Figures cover only the first six days of the cycle.</p>
+  </div>
+
+  <section class="kpi-grid avoid-break">
+    <div class="kpi-card"><div class="kpi-label">Monthly budget</div><div class="kpi-value">$492.1<span class="small">k</span></div><div class="kpi-meta">17 active accounts</div></div>
+    <div class="kpi-card"><div class="kpi-label">MTD spend</div><div class="kpi-value">$76.2<span class="small">k</span></div><div class="kpi-meta">first six days of June</div></div>
+    <div class="kpi-card"><div class="kpi-label">Median budget pacing</div><div class="kpi-value">74.4<span class="small">%</span></div><div class="kpi-meta">of to-date target</div></div>
+    <div class="kpi-card"><div class="kpi-label">At / above ROAS target</div><div class="kpi-value">12<span class="small"> / 17</span></div><div class="kpi-meta"><span class="kpi-trend trend-up">71%</span> on absolute ROAS</div></div>
+  </section>
+
+  <section class="section">
+    <div class="section-header"><div class="section-title">Account commentary</div><div class="section-meta">Verbatim from weekly check-in</div></div>
+    <div id="commentaryList" class="commentary-list"></div>
+  </section>
+
+  <div class="page-break"></div>
+
+  <section class="section">
+    <div class="chart-grid">
+      <div class="avoid-break">
+        <div class="section-header"><div class="section-title">Scaling efficiency</div><div class="section-meta">Spend Δ vs conversion Δ</div></div>
+        <div class="chart-card">
+          <canvas id="scaleScatter" role="img" aria-label="Scatter plot of week-over-week spend change versus conversion change by account">Spend change versus conversion change.</canvas>
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-dot" style="background:#2B9968;"></span>Conversions grew</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#C4502F;"></span>Conversions fell</span>
+          </div>
+          <div class="chart-note">Week-over-week % changes as stated in the weekly comments. Top-right = scaled efficiently; bottom-right = spend rose but conversions fell (diminishing returns).</div>
+        </div>
+      </div>
+      <div class="avoid-break">
+        <div class="section-header"><div class="section-title">Budget pacing</div><div class="section-meta">% of to-date daily target</div></div>
+        <div class="chart-card">
+          <canvas id="pacingChart" role="img" aria-label="Horizontal bar chart of budget pacing percentage by account">Pacing by account.</canvas>
+          <div class="chart-note">Spend ÷ (daily target × 6 days). Below 100% = underpacing — this week reflecting deliberate spend discipline after the scaling tests.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section avoid-break">
+    <div class="section-header"><div class="section-title">Account scoreboard</div><div class="section-meta">Ranked by reported ROAS</div></div>
+    <div class="scoreboard">
+      <div class="scoreboard-head">
+        <div>Account</div>
+        <div class="text-right">MTD spend</div>
+        <div class="text-right">Pacing</div>
+        <div class="text-right">ROAS · plat / rep</div>
+        <div class="text-right">Target</div>
+        <div class="text-right">Status</div>
+      </div>
+      <div id="accountRows"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="highlight-grid">
+      <div class="highlight-card avoid-break">
+        <div class="highlight-head"><i class="ti ti-trending-up" style="font-size:17px;color:var(--teal-500);" aria-hidden="true"></i><span class="highlight-eyebrow top">Strongest performers</span></div>
+        <div class="highlight-desc">Elite ROAS — including the week's most efficient scalers</div>
+        <div class="highlight-item top"><div><div class="highlight-name text-teal-900">Jeff Nippard</div><div class="highlight-sub text-teal-700">$3.84 CPA · DSA-led</div></div><div class="text-right"><div class="highlight-value text-teal-900">13.23×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div></div>
+        <div class="highlight-item top"><div><div class="highlight-name text-teal-900">Edge Lifestyle</div><div class="highlight-sub text-teal-700">AOV +11% to $161</div></div><div class="text-right"><div class="highlight-value text-teal-900">10.93×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div></div>
+        <div class="highlight-item top"><div><div class="highlight-name text-teal-900">Baboon To The Moon</div><div class="highlight-sub text-teal-700">Flat spend, +60% conv, $13.56 CPA</div></div><div class="text-right"><div class="highlight-value text-teal-900">10.35×</div><div class="highlight-tag text-teal-700">vs 3.0× target</div></div></div>
+        <div class="highlight-item top"><div><div class="highlight-name text-teal-900">Ilios Lighting</div><div class="highlight-sub text-teal-700">2× spend → +58% conversions</div></div><div class="text-right"><div class="highlight-value text-teal-900">5.95×</div><div class="highlight-tag text-teal-700">scaled efficiently</div></div></div>
+      </div>
+      <div class="highlight-card avoid-break">
+        <div class="highlight-head"><i class="ti ti-target-arrow" style="font-size:17px;color:var(--amber-500);" aria-hidden="true"></i><span class="highlight-eyebrow focus">Active optimization</span></div>
+        <div class="highlight-desc">Scaling hit diminishing returns — pullback and audits underway</div>
+        <div class="highlight-item focus"><div><div class="highlight-name text-amber-900">House of Leon</div><div class="highlight-sub text-amber-700">+35% spend → conv −27% · deep audit</div></div><div class="text-right"><div class="highlight-value text-amber-900">$409</div><div class="highlight-tag text-amber-700">CPA spike</div></div></div>
+        <div class="highlight-item focus"><div><div class="highlight-name text-amber-900">Out of Print Clothing</div><div class="highlight-sub text-amber-700">+28% spend → CPA +53% · ST audit</div></div><div class="text-right"><div class="highlight-value text-amber-900">3.46×</div><div class="highlight-tag text-amber-700">pulling back</div></div></div>
+        <div class="highlight-item focus"><div><div class="highlight-name text-amber-900">Tie Boss</div><div class="highlight-sub text-amber-700">CPA +50% · reverting bid scaling</div></div><div class="text-right"><div class="highlight-value text-amber-900">5.66×</div><div class="highlight-tag text-amber-700">above target, declining</div></div></div>
+        <div class="highlight-item focus"><div><div class="highlight-name text-amber-900">Simply Good Coffee</div><div class="highlight-sub text-amber-700">CPA $159.83 · negativing weak terms</div></div><div class="text-right"><div class="highlight-value text-amber-900">2.42×</div><div class="highlight-tag text-amber-700">near 2.5 target</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header"><div class="section-title">Structural themes</div><div class="section-meta">Portfolio-wide patterns this week</div></div>
+    <div class="theme-grid">
+      <div class="theme-card avoid-break"><div class="theme-head"><div class="theme-title">Aggressive scaling, diminishing returns</div><span class="theme-badge badge-red">5 accounts</span></div><div class="theme-body">House of Leon (+35% spend / conv −27%), Out of Print (+28% / −16%), Tie Boss (+16% / −22%), Simply Good Coffee (+8% / −22%), and POPFLEX (+18% / −6%) pushed budgets but conversions fell and CPA rose.</div></div>
+      <div class="theme-card avoid-break"><div class="theme-head"><div class="theme-title">Disciplined pullback &amp; audits</div><span class="theme-badge badge-amber">Portfolio-wide</span></div><div class="theme-body">House of Leon is running a deep scaling audit; Out of Print a granular search-term audit today; Tie Boss is reverting last week's bid scaling; The Luxe Lens is consolidating into proven exact-match ad groups; POPFLEX is refocusing on core remarketing.</div></div>
+      <div class="theme-card avoid-break"><div class="theme-head"><div class="theme-title">The efficient scalers</div><span class="theme-badge badge-teal">3 accounts</span></div><div class="theme-body">Baboon held spend flat yet grew conversions 60% at a $13.56 CPA; Ilios doubled spend for a 58% conversion lift; Iron Neck paired a 6% spend rise with a clean 3% conversion gain — the template for how to scale.</div></div>
+      <div class="theme-card avoid-break"><div class="theme-head"><div class="theme-title">Tracking &amp; approval fixes</div><span class="theme-badge badge-blue">3 accounts</span></div><div class="theme-body">OmegaVia resolved a geo-filter add-to-cart issue and resumed product-page routing; Lice Doctors restored its v2 landing page after an ad disapproval; Chilly Goat is deferring to Triple Whale through its 23-day platform attribution lag.</div></div>
+    </div>
+  </section>
+
+  <div class="footnote avoid-break">
+    <strong>Methodology.</strong> Spend, pacing, and budget figures use the structured weekly table. ROAS figures cited in the account comments reflect blended / Triple Whale reporting and differ from the platform ROAS MTD in the same table — both are shown side-by-side in the scoreboard (plat / rep) so the gap is visible. Pacing is spend ÷ (daily target × 6 days elapsed); values under 100% indicate underpacing. Playtex Baby is not included in this week's report.
+  </div>
+
+  <footer class="footer">
+    <div class="footer-brand">WRK Marketing</div>
+    <div>Source: weekly check-in summary · 1 – 7 June 2026</div>
+  </footer>
+
+</div>
+
+<script>
+  const accounts = [
+    { name:'Jeff Nippard', mt:2000, sp:338.75, pac:85.82, plat:10.38, rep:13.23, target:'3.0×', status:'top' },
+    { name:'Edge Lifestyle', mt:3000, sp:561.46, pac:94.82, plat:10.95, rep:10.93, target:'3.0×', status:'top' },
+    { name:'Baboon To The Moon', mt:21700, sp:3882.21, pac:90.64, plat:6.52, rep:10.35, target:'3.0× NB', status:'top' },
+    { name:'POPFLEX', mt:40000, sp:6342.48, pac:80.34, plat:3.55, rep:7.01, target:'3.0×', status:'on' },
+    { name:'House of Leon', mt:95000, sp:15647.66, pac:83.45, plat:1.56, rep:6.59, target:'3.0× / 9.2 MER', status:'attention' },
+    { name:'Ilios Lighting', mt:4619.28, sp:613.05, pac:67.24, plat:2.87, rep:5.95, target:'4.2 MER', status:'top' },
+    { name:'Tie Boss', mt:13028.57, sp:2096.62, pac:81.54, plat:7.23, rep:5.66, target:'3.0×', status:'monitor' },
+    { name:'Iron Neck', mt:15200, sp:1923.12, pac:64.10, plat:2.34, rep:4.30, target:'3.0× MER', status:'on' },
+    { name:'Out of Print Clothing', mt:17000, sp:2824.22, pac:84.17, plat:2.69, rep:3.46, target:'3.0× NB', status:'monitor' },
+    { name:'LumeCube', mt:65968, sp:6408.59, pac:49.22, plat:2.41, rep:3.41, target:'5.0 MER', status:'monitor' },
+    { name:'Meditac Kits', mt:26000, sp:3761.28, pac:73.30, plat:1.52, rep:3.19, target:'3.0×', status:'on' },
+    { name:'Simply Good Coffee', mt:134537.12, sp:25339.59, pac:95.43, plat:1.00, rep:2.42, target:'2.5×', status:'monitor' },
+    { name:'The Luxe Lens', mt:23000.82, sp:3376.62, pac:74.38, plat:1.37, rep:1.56, target:'1.40×', status:'monitor' },
+    { name:'Thrival', mt:5000, sp:344.51, pac:34.91, plat:1.26, rep:1.52, target:'1.5×', status:'monitor' },
+    { name:'OmegaVia — Main', mt:5000, sp:399.99, pac:40.53, plat:1.26, rep:1.22, target:'1.5 aMER', status:'monitor' },
+    { name:'Chilly Goat Cold Tubs', mt:3000, sp:330.24, pac:55.77, plat:0.00, rep:null, special:'tw', target:'3.0×', status:'monitor' },
+    { name:'Lice Doctors', mt:18000, sp:2038.65, pac:57.38, plat:null, rep:null, special:'cpl', cpl:68.27, target:'$40 CPL', status:'monitor' },
+  ];
+
+  const statusStyles = {
+    'top':{cls:'pill-top',label:'Exceeding'},
+    'on':{cls:'pill-on',label:'On target'},
+    'monitor':{cls:'pill-monitor',label:'Optimizing'},
+    'attention':{cls:'pill-attention',label:'Attention'},
+  };
+
+  const rowsHtml = accounts.map((a,i) => {
+    const s = statusStyles[a.status];
+    const rank = String(i+1).padStart(2,'0');
+    const fmtSpend = '$' + a.sp.toLocaleString('en-US',{maximumFractionDigits:0});
+    const pacingClass = a.pac >= 90 ? 'pacing-good' : a.pac >= 65 ? 'pacing-warn' : 'pacing-bad';
+    let roasCell;
+    if (a.special === 'cpl') roasCell = `<span class="roas-rep">$${a.cpl.toFixed(2)}</span><span class="metric-tag">CPL</span>`;
+    else if (a.special === 'tw') roasCell = `<span class="roas-plat">0.00</span> <span class="roas-rep">TW</span><span class="metric-tag">defer</span>`;
+    else roasCell = `<span class="roas-plat">${a.plat.toFixed(2)}</span> / <span class="roas-rep">${a.rep.toFixed(2)}</span>`;
+    return `<div class="scoreboard-row">
+      <div class="row-name"><span class="row-rank">${rank}</span>${a.name}</div>
+      <div class="text-right muted num">${fmtSpend}</div>
+      <div class="text-right num ${pacingClass}">${a.pac.toFixed(1)}%</div>
+      <div class="text-right roas-split">${roasCell}</div>
+      <div class="text-right muted num">${a.target}</div>
+      <div class="text-right"><span class="pill ${s.cls}">${s.label}</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('accountRows').innerHTML = rowsHtml;
+
+  const commentaries = [
+    { name:'Baboon To The Moon', tone:'top', stats:[['ROAS (plat)','10.35'],['CPA','$13.56'],['Conv','+60%']],
+      insight:`Spend stayed completely flat at $16338 while conversions surged an incredible 60 percent to over 1200. This efficiency pushed our CPA down to a highly profitable $13.56. Platform ROAS is currently sitting at an exceptional 10.35 even with a slight dip in AOV to $140. We are clearly capturing a wave of high converting traffic right now. The move here is to ride this momentum by incrementally feeding more budget into our top performing campaigns to maximize output without breaking the algorithm.` },
+    { name:'Meditac Kits', tone:'on', stats:[['ROAS','3.19'],['AOV','+18% / $135'],['Target','3.0']],
+      insight:`The recent ad group rebuilds centered around our top 103 SKUs are stabilizing beautifully post launch. We are seeing a solid 18 percent AOV lift to $135 which helped elevate platform ROAS to 3.19. Conversion volume did take a 16 percent dip which drove CPA up to $42.35 but this is entirely expected behavior. These refreshed asset groups just need time to exit algorithmic learning phases and build up their historical data. We will hold the line and let the machine optimize.` },
+    { name:'House of Leon', tone:'attention', stats:[['ROAS','6.59'],['CPA','$409'],['Conv','−27%']],
+      insight:`We pushed aggressive scaling this week and increased spend by 35 percent to $121512. Unfortunately the platform struggled to absorb that budget efficiently and conversions dropped 27 percent. This caused a severe CPA spike to $409 and compressed our ROAS down to 6.59. To correct this we are immediately reigning in budgets on the inefficient campaigns. We will run a deep audit on the recent scaling adjustments to find the exact leakage points and restore our baseline efficiency.` },
+    { name:'Ilios Lighting', tone:'top', stats:[['ROAS','5.95'],['Conv','+58%'],['Spend','2×']],
+      insight:`Doubling our spend to $4505 was a bold move that successfully drove a massive 58 percent lift in conversion volume. Pushing budget this fast always introduces some expected efficiency friction and we saw CPA rise to $30.95 while ROAS softened to 5.95. This is a very acceptable trade off for the volume we gained. We will hold budgets perfectly steady at this new tier to let the algorithm map out the higher volume threshold before making any further moves.` },
+    { name:'Iron Neck', tone:'on', stats:[['ROAS','4.30'],['Spend','+6%'],['Conv','+3%']],
+      insight:`Everything is looking incredibly stable week over week. We pushed a minor 6 percent spend increase and the account responded perfectly with a proportional 3 percent lift in conversions. ROAS held strong at 4.30 and our AOV and CPA saw practically zero variance. This kind of predictability is exactly what we want. We will maintain our current targets while carefully testing some incremental bid adjustments on our top converting exact match search queries.` },
+    { name:'LumeCube', tone:'monitor', stats:[['ROAS','3.41'],['CPA','$71.10'],['Conv','−24%']],
+      insight:`We saw conversion volume contract by 24 percent despite only dropping spend by a fraction. This inefficiency caused our CPA to climb uncomfortably to $71.10. With AOV remaining flat at $242 the drop in conversion rate pulled our ROAS down to 3.41. The immediate next step is to pull our auction insights report and check for new competitor pressure. We will need to adjust bids downward on our lagging non brand segments to protect profitability.` },
+    { name:'POPFLEX', tone:'on', stats:[['ROAS','7.01'],['AOV','$125'],['Conv','−6%']],
+      insight:`We pushed spend up 18 percent to $44536 but the algorithm failed to yield proportional volume. Conversions actually slid 6 percent and CPA rose to $17.86. Luckily a healthy AOV increase to $125 helped buffer the efficiency loss and kept ROAS at a very solid 7.01. The takeaway here is that broad expansion is not working right now. We will dial back those efforts and refocus our spend strictly on our core high intent remarketing audiences where we know the return is guaranteed.` },
+    { name:'Simply Good Coffee, Inc.', tone:'monitor', stats:[['ROAS','2.42'],['CPA','$159.83'],['Target','2.5']],
+      insight:`Our recent Target ROAS reductions successfully unlocked the non brand search volume we wanted but it drove some temporary inefficiency. ROAS dropped to 2.42 and the 8 percent spend increase coupled with a 22 percent volume drop spiked our CPA to $159.83. We are actively analyzing the newly acquired plastic free coffee maker search terms. The plan is to aggressively negative out the poor performers so we can keep the volume but improve the traffic quality.` },
+    { name:'The Luxe Lens', tone:'monitor', stats:[['ROAS','1.56'],['AOV','$29'],['Target','1.40']],
+      insight:`Spend increased nearly 20 percent to $22073 but we hit immediate diminishing returns. This pushed CPA up 24 percent and depressed ROAS to a weak 1.56. Conversion volume slightly regressed alongside a flat AOV of $29. We need to stop the bleeding immediately by pulling back budgets on these exploratory campaigns. We will consolidate our spend directly into our historically proven exact match ad groups to get efficiency back on track.` },
+    { name:'Thrival', tone:'monitor', stats:[['ROAS','1.52'],['Spend','$521'],['Target','1.5']],
+      insight:`Spend is currently sitting at $521 with a 1.52 ROAS. Our non brand shopping campaigns remain the absolute primary driver of performance here. We are actively transitioning our non brand search away from Maximize Conversion Value. Moving those search campaigns to a Target ROAS of 1.5x is the right strategic play to better control bid inflation and stabilize auction efficiency across the board.` },
+    { name:'Tie Boss', tone:'monitor', stats:[['ROAS','5.66'],['CPA','+50%'],['Conv','−22%']],
+      insight:`Pushing cost up 16 percent to $14755 yielded very poor front end performance. Conversions shrank by 22 percent and CPA spiked almost 50 percent to $17.36. AOV did improve to $98 but it was not enough to save ROAS which took a heavy hit down to 5.66. We are reverting the aggressive bid scaling we implemented last week. The team is currently isolating the specific ad groups responsible for the wasted spend so we can pause them out.` },
+    { name:'Chilly Goat Cold Tubs', tone:'monitor', stats:[['Conv','3'],['CPA','$651'],['Note','23-day lag']],
+      insight:`Spend was cut sharply by almost 60 percent this week. This heavily restricted volume to just 3 conversions and drove extreme CPA volatility at $651. Given the known 23 day attribution lag we experience on Google Ads for this specific account we are completely ignoring early platform inefficiencies. We will defer entirely to our Triple Whale metrics to validate actual profitability before we make any reactive adjustments.` },
+    { name:'Edge Lifestyle', tone:'top', stats:[['ROAS','10.93'],['AOV','+11% / $161'],['CPA','$14.75']],
+      insight:`Efficiency remains absolutely elite here with ROAS ticking up to 10.93. This is primarily driven by a strong 11 percent increase in AOV to $161. A minor spend reduction resulted in a completely proportional drop in conversions which bumped CPA to $14.75. The account is highly stable and predictable. We will start looking for calculated opportunities to scale our top performing assets without breaking these fantastic target thresholds.` },
+    { name:'Jeff Nippard', tone:'top', stats:[['ROAS','13.23'],['CPA','$3.84'],['Target','3.0']],
+      insight:`Account efficiency remains incredibly stellar with ROAS sitting at 13.23 and an insanely low $3.84 CPA. The massive non brand cleanups and zombie ad group pauses we executed are working exactly as intended. We have a very tight baseline now. We will continue leaning heavily into our high performing Dynamic Search Ads to capture cheap incremental volume and keep the top of the funnel full.` },
+    { name:'Lice Doctors', tone:'monitor', stats:[['CPL','$68.27'],['Spend','$2935'],['Target','$40']],
+      insight:`Spend landed at $2935 with our Cost Per Lead stabilizing nicely at $68.27. The disapproved ad issue was a headache but it was successfully resolved after the treatment version two landing page was fully restored. Lead volume is steadily rebounding day by day. We will monitor the daily pacing closely to ensure things stay on track without triggering any unnecessary bid inflation in the auction.` },
+    { name:'OmegaVia - Main Account', tone:'monitor', stats:[['ROAS','1.22'],['Spend','$680'],['Target','1.5 aMER']],
+      insight:`We recorded $680 in spend with a 1.22 ROAS this cycle. The missing add to cart button was confirmed as a simple geo filter issue that does not impact our core US traffic. Because of this we have fully resumed product page routing. The Brand Chewies product line is currently our strongest performer by a wide margin so we will direct the majority of our daily budget there to maximize return.` },
+    { name:'Out of Print Clothing', tone:'monitor', stats:[['ROAS','3.46'],['CPA','+53%'],['Conv','−16%']],
+      insight:`A massive 28 percent spend increase triggered a severe efficiency drop across the board. Conversions fell 16 percent and CPA surged 53 percent to $13.61. Flat AOV compounded the issue and drove ROAS down to 3.46. We need an immediate and aggressive pullback on these recent budget expansions. The team is running a granular audit of the search term reports today to stem the bleed and isolate the wasted spend.` },
+  ];
+
+  const toneMap = {
+    'top':{cls:'pill-top',label:'Exceeding'},
+    'on':{cls:'pill-on',label:'On target'},
+    'monitor':{cls:'pill-monitor',label:'Optimizing'},
+    'attention':{cls:'pill-attention',label:'Attention'},
+  };
+
+  const commentaryHtml = commentaries.map(c => {
+    const t = toneMap[c.tone];
+    const statsHtml = c.stats.map((s,idx) =>
+      `${idx>0?'<span class="stat-divider">·</span>':''}<span><strong>${s[0]}</strong> ${s[1]}</span>`
+    ).join('');
+    return `<div class="commentary-card tone-${c.tone} avoid-break">
+      <div class="commentary-head">
+        <div class="commentary-id"><div class="commentary-name">${c.name}</div><span class="pill ${t.cls}">${t.label}</span></div>
+        <div class="commentary-stats">${statsHtml}</div>
+      </div>
+      <div class="commentary-body">${c.insight}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('commentaryList').innerHTML = commentaryHtml;
+
+  const textColor = '#56544E';
+  const gridColor = 'rgba(0,0,0,0.05)';
+
+  // Chart 1: Spend change vs conversion change (from comments)
+  const scalePoints = [
+    { name:'Baboon To The Moon', x:0, y:60 },
+    { name:'House of Leon', x:35, y:-27 },
+    { name:'Ilios Lighting', x:100, y:58 },
+    { name:'Iron Neck', x:6, y:3 },
+    { name:'POPFLEX', x:18, y:-6 },
+    { name:'Simply Good Coffee', x:8, y:-22 },
+    { name:'Tie Boss', x:16, y:-22 },
+    { name:'Out of Print Clothing', x:28, y:-16 },
+  ];
+  new Chart(document.getElementById('scaleScatter'), {
+    type:'scatter',
+    data:{ datasets:[{
+      data: scalePoints,
+      backgroundColor: scalePoints.map(p => p.y >= 0 ? '#2B9968' : '#C4502F'),
+      borderColor:'#fff', borderWidth:1.5, pointRadius:7, pointHoverRadius:10,
+    }]},
+    options:{
+      responsive:true, maintainAspectRatio:false, layout:{padding:12},
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'#1A1814', titleFont:{size:12,weight:'500',family:'Inter'}, bodyFont:{size:12,family:'Inter'}, padding:12, cornerRadius:6, displayColors:false,
+          callbacks:{ title:(items)=>items[0].raw.name, label:(ctx)=>`Spend ${ctx.raw.x>=0?'+':''}${ctx.raw.x}% · Conv ${ctx.raw.y>=0?'+':''}${ctx.raw.y}%` } },
+      },
+      scales:{
+        x:{ title:{display:true,text:'Spend change (%)',color:textColor,font:{size:11,family:'Inter'}}, grid:{color:(ctx)=>ctx.tick.value===0?'#B8B5AA':gridColor}, ticks:{color:textColor,font:{size:11,family:'Inter'},callback:(v)=>(v>0?'+':'')+v+'%'}, min:-10, max:110 },
+        y:{ title:{display:true,text:'Conversion change (%)',color:textColor,font:{size:11,family:'Inter'}}, grid:{color:(ctx)=>ctx.tick.value===0?'#B8B5AA':gridColor}, ticks:{color:textColor,font:{size:11,family:'Inter'},callback:(v)=>(v>0?'+':'')+v+'%'}, min:-35, max:70 },
+      },
+    },
+  });
+
+  // Chart 2: Budget pacing bar (from table)
+  const pacingSorted = [...accounts].sort((a,b)=>a.pac-b.pac);
+  const pacingColors = pacingSorted.map(a => {
+    if (a.pac >= 90) return '#2B9968';
+    if (a.pac >= 75) return '#3B7AB8';
+    if (a.pac >= 60) return '#B57F1F';
+    return '#C4502F';
+  });
+  new Chart(document.getElementById('pacingChart'), {
+    type:'bar',
+    data:{ labels:pacingSorted.map(a=>a.name), datasets:[{
+      data:pacingSorted.map(a=>Math.round(a.pac*10)/10),
+      backgroundColor:pacingColors, borderColor:pacingColors, borderWidth:0, barThickness:10, borderRadius:2,
+    }]},
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      layout:{padding:{left:4,right:24,top:4,bottom:4}},
+      plugins:{
+        legend:{display:false},
+        tooltip:{ backgroundColor:'#1A1814', titleFont:{size:12,weight:'500',family:'Inter'}, bodyFont:{size:12,family:'Inter'}, padding:12, cornerRadius:6, displayColors:false,
+          callbacks:{ label:(ctx)=>`${ctx.parsed.x}% of to-date target` } },
+      },
+      scales:{
+        x:{ grid:{color:gridColor}, ticks:{color:textColor,font:{size:10,family:'Inter'},callback:(v)=>v+'%'}, max:110 },
+        y:{ grid:{display:false}, ticks:{color:textColor,font:{size:9.5,family:'Inter'}} },
+      },
+    },
+  });
+</script>
+</body>
+</html>
